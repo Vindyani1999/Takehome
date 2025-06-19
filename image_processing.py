@@ -8,19 +8,19 @@ def reduce_intensity_levels(image, levels):
     reduced_image = (image // factor) * factor
     return reduced_image.astype(np.uint8)
 
+"""Applies a mean filter with given kernel size."""
 def average_filter(image, kernel_size):
-    """Applies a mean filter with given kernel size."""
     return cv2.blur(image, (kernel_size, kernel_size))
 
+"""Rotates image by given angle in degrees."""
 def rotate_image(image, angle):
-    """Rotates image by given angle (in degrees)."""
     (h, w) = image.shape[:2]
     center = (w // 2, h // 2)
     rot_mat = cv2.getRotationMatrix2D(center, angle, 1.0)
     return cv2.warpAffine(image, rot_mat, (w, h))
 
+"""Reduces spatial resolution by block averaging."""
 def block_average(image, block_size):
-    """Reduces spatial resolution by block averaging."""
     h, w = image.shape[:2]
     out = np.zeros_like(image)
     for y in range(0, h, block_size):
@@ -30,8 +30,8 @@ def block_average(image, block_size):
             out[y:y+block_size, x:x+block_size] = avg
     return out.astype(np.uint8)
 
+"""Displays an image using matplotlib"""
 def display_image(title, img):
-    """Displays an image using matplotlib (useful for notebooks)."""
     if len(img.shape) == 2:
         plt.imshow(img, cmap='gray')
     else:
@@ -42,7 +42,7 @@ def display_image(title, img):
 
 def main():
     # Load grayscale and color image
-    img_path = './tulips.png'  # Replace with your test image
+    img_path = './tulips.png' 
     gray = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
     color = cv2.imread(img_path)
 
